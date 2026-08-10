@@ -366,17 +366,6 @@
 
     <hr class="divider">
 
-    <div class="row-2">
-      <div class="field">
-        <label for="supportPhone">Support phone</label>
-        <input id="supportPhone" type="text" placeholder="1-800-555-0142" autocomplete="off" spellcheck="false">
-      </div>
-      <div class="field">
-        <label for="supportLink">Support link</label>
-        <input id="supportLink" type="text" placeholder="support.xplore.com" autocomplete="off" spellcheck="false">
-      </div>
-    </div>
-
     <div class="actions">
       <button class="btn" id="clearBtn">Clear form</button>
       <button class="btn primary" id="downloadBtn">Download PNG</button>
@@ -441,8 +430,8 @@
   const ssid = document.getElementById('ssid');
   const pw = document.getElementById('pw');
   const sec = document.getElementById('sec');
-  const supportPhone = document.getElementById('supportPhone');
-  const supportLink = document.getElementById('supportLink');
+  const SUPPORT_PHONE = "1-866-841-6001";
+  const SUPPORT_LINK = "xplore.ca/support";
 
   const outAcct = document.getElementById('outAcct');
   const outSsid = document.getElementById('outSsid');
@@ -483,8 +472,8 @@
     outAcct.textContent = acct.value.trim() || '—';
     outSsid.textContent = ssid.value.trim() || '—';
     outPw.textContent = pw.value ? pw.value : '—';
-    outPhone.textContent = supportPhone.value.trim() || '—';
-    outLink.textContent = supportLink.value.trim() || '—';
+    outPhone.textContent = SUPPORT_PHONE;
+    outLink.textContent = SUPPORT_LINK;
 
     const wifiStr = buildWifiString();
     qrDiv.innerHTML = '';
@@ -502,7 +491,7 @@
     }
   }
 
-  [acct, ssid, pw, sec, supportPhone, supportLink].forEach(el => {
+  [acct, ssid, pw, sec].forEach(el => {
     el.addEventListener('input', render);
     el.addEventListener('change', render);
   });
@@ -540,8 +529,6 @@
     });
   });
 
-  supportPhone.value = "1-866-841-6001";
-  supportLink.value = "xplore.ca/support";
   render();
 </script>
 
