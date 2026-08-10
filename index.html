@@ -351,8 +351,7 @@
     <div class="field">
       <label for="pw">WiFi password</label>
       <div class="pw-wrap">
-        <input id="pw" placeholder="e.g. sunset-otter-42" autocomplete="off" spellcheck="false">
-        <button type="button" class="pw-toggle" id="pwToggle">SHOW</button>
+        <input id="pw" type="text" placeholder="e.g. sunset-otter-42" autocomplete="off" spellcheck="false">
       </div>
     </div>
 
@@ -508,17 +507,9 @@
     el.addEventListener('change', render);
   });
 
-  document.getElementById('pwToggle').addEventListener('click', () => {
-    const showing = pw.type === 'text';
-    pw.type = showing ? 'password' : 'text';
-    document.getElementById('pwToggle').textContent = showing ? 'SHOW' : 'HIDE';
-  });
-
   document.getElementById('clearBtn').addEventListener('click', () => {
     [acct, ssid, pw].forEach(el => el.value = '');
     sec.value = 'WPA';
-    pw.type = 'password';
-    document.getElementById('pwToggle').textContent = 'SHOW';
     render();
   });
 
