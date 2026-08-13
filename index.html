@@ -358,15 +358,6 @@
       </div>
     </div>
 
-    <div class="field">
-      <label for="sec">Security type</label>
-      <select id="sec">
-        <option value="WPA">WPA / WPA2</option>
-        <option value="nopass">Open (no password)</option>
-        <option value="WEP">WEP</option>
-      </select>
-    </div>
-
     <hr class="divider">
 
     <div class="actions">
@@ -432,7 +423,6 @@
   const acct = document.getElementById('acct');
   const ssid = document.getElementById('ssid');
   const pw = document.getElementById('pw');
-  const sec = document.getElementById('sec');
   const SUPPORT_PHONE = "1-866-841-6001";
   const SUPPORT_LINK = "xplore.ca/support";
 
@@ -463,18 +453,18 @@
   function buildWifiString(){
     const s = ssid.value.trim();
     const p = pw.value;
-    const security = sec.value;
     if(!s) return null;
-    if(security === 'nopass'){
+    if(!p){
+      // No password entered = open network
       return `WIFI:T:nopass;S:${escapeWifi(s)};;`;
     }
-    return `WIFI:T:${security};S:${escapeWifi(s)};P:${escapeWifi(p)};;`;
+    return `WIFI:T:WPA;S:${escapeWifi(s)};P:${escapeWifi(p)};;`;
   }
 
   function render(){
     outAcct.textContent = acct.value.trim() || '—';
     outSsid.textContent = ssid.value.trim() || '—';
-    outPw.textContent = pw.value ? pw.value : '—';
+    outPw.textContent = pw.value ? pw.value : (ssid.value.trim() ? 'None (open network)' : '—');
     outPhone.textContent = SUPPORT_PHONE;
     outLink.textContent = SUPPORT_LINK;
 
@@ -494,14 +484,13 @@
     }
   }
 
-  [acct, ssid, pw, sec].forEach(el => {
+  [acct, ssid, pw].forEach(el => {
     el.addEventListener('input', render);
     el.addEventListener('change', render);
   });
 
   document.getElementById('clearBtn').addEventListener('click', () => {
     [acct, ssid, pw].forEach(el => el.value = '');
-    sec.value = 'WPA';
     render();
   });
 
