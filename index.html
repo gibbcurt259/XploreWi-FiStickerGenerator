@@ -97,22 +97,15 @@
   }
 
   /* ---- form ---- */
-  .appbar{
-    max-width: 1220px;
-    margin: 0 auto;
-    padding: 20px 32px 0;
-    display:flex;
-    justify-content:flex-end;
-  }
-  @media (max-width: 600px){
-    .appbar{ padding: 14px 14px 0; }
-  }
   .lang-toggle{
+    position:absolute;
+    top:12px;
+    right:12px; /* tucked inside the panel's top-right corner */
     display:flex;
     border:1px solid #000;
     border-radius:8px;
     overflow:hidden;
-    flex-shrink:0;
+    background:#fff;
   }
   .lang-toggle button{
     background:#fff;
@@ -131,7 +124,12 @@
     color:#fff;
     cursor:default;
   }
+  .panel h2{ padding-right:100px; } /* keep the title clear of the toggle */
+  @media (max-width: 600px){
+    .lang-toggle{ right:10px; top:10px; }
+  }
   .panel{
+    position:relative;
     background: var(--panel);
     border: 1px solid #ddd;
     border-radius: 14px;
@@ -371,16 +369,13 @@
 
 
 
-<div class="appbar">
-  <div class="lang-toggle" role="group" aria-label="Language / Langue">
-    <button type="button" id="langEn">EN</button>
-    <button type="button" id="langFr">FR</button>
-  </div>
-</div>
-
 <div class="layout">
 
   <div class="panel">
+    <div class="lang-toggle" role="group" aria-label="Language / Langue">
+      <button type="button" id="langEn">EN</button>
+      <button type="button" id="langFr">FR</button>
+    </div>
     <h2 data-i18n="title">Xplore Wi-Fi Sticker Generator</h2>
     <p class="hint" data-i18n="hint">Fill this in on site, then download the card as a PNG to print.</p>
 
@@ -605,7 +600,7 @@
         correctLevel: QRCode.CorrectLevel.M
       });
     } else {
-      qrDiv.innerHTML = '<div style="width:258px;height:258px;display:flex;align-items:center;justify-content:center;color:#999;font-family:Inter,sans-serif;font-size:12px;text-align:center;padding:8px;border:1px dashed #ccc;"></div>';
+      qrDiv.innerHTML = '<div style="width:258px;height:258px;display:flex;align-items:center;justify-content:center;color:#999;font-family:Inter,sans-serif;font-size:12px;line-height:1.45;text-align:center;padding:8px;border:1px dashed #ccc;"></div>';
       qrDiv.firstChild.textContent = t('qrEmpty');
     }
   }

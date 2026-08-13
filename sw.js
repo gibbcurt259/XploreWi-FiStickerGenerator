@@ -1,7 +1,7 @@
 /* Xplore Wi-Fi Sticker Generator — offline service worker.
    Bump CACHE_VERSION whenever you change index.html or the libs,
    so techs pick up the new version on their next online visit. */
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v8';
 const CACHE_NAME = `wifi-sticker-${CACHE_VERSION}`;
 
 // Everything the app needs to run, relative to wherever the site is hosted
