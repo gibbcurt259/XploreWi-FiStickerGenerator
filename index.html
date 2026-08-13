@@ -97,11 +97,15 @@
   }
 
   /* ---- form ---- */
-  .panel-head{
+  .appbar{
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
     display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:12px;
+    justify-content:flex-end;
+  }
+  @media (max-width: 600px){
+    .appbar{ padding: 14px 14px 0; }
   }
   .lang-toggle{
     display:flex;
@@ -354,25 +358,30 @@
     font-weight:700;
     color:#000;
     text-align:right;
-    word-break:break-word;
+    white-space:nowrap; /* phone + URL are fixed-width constants; never wrap them */
   }
-  .support-row.account .v{ font-size:32px; }
+  .support-row.account .v{
+    font-size:32px;
+    white-space:normal;      /* account numbers vary in length, so */
+    word-break:break-word;   /* let this one wrap if it must */
+  }
 </style>
 </head>
 <body>
 
 
 
+<div class="appbar">
+  <div class="lang-toggle" role="group" aria-label="Language / Langue">
+    <button type="button" id="langEn">EN</button>
+    <button type="button" id="langFr">FR</button>
+  </div>
+</div>
+
 <div class="layout">
 
   <div class="panel">
-    <div class="panel-head">
-      <h2 data-i18n="title">Xplore Wi-Fi Sticker Generator</h2>
-      <div class="lang-toggle" role="group" aria-label="Language / Langue">
-        <button type="button" id="langEn">EN</button>
-        <button type="button" id="langFr">FR</button>
-      </div>
-    </div>
+    <h2 data-i18n="title">Xplore Wi-Fi Sticker Generator</h2>
     <p class="hint" data-i18n="hint">Fill this in on site, then download the card as a PNG to print.</p>
 
     <div class="field">
@@ -506,7 +515,7 @@
       cardSsid: "Nom du réseau",
       cardPw: "Mot de passe",
       cardAcct: "Numéro de compte",
-      cardPhone: "Soutien technique",
+      cardPhone: "Soutien",
       cardOnline: "En ligne",
       openNetwork: "Aucun (réseau ouvert)"
     }
