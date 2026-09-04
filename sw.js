@@ -1,7 +1,7 @@
 /* Xplore Wi-Fi Sticker Generator — offline service worker.
    Bump CACHE_VERSION whenever you change index.html or the libs,
    so techs pick up the new version on their next online visit. */
-const CACHE_VERSION = 'v9';
+const CACHE_VERSION = 'v10';
 const CACHE_NAME = `wifi-sticker-${CACHE_VERSION}`;
 
 // Everything the app needs to run, relative to wherever the site is hosted
@@ -11,6 +11,7 @@ const PRECACHE = [
   './index.html',
   './lib/qrcode.min.js',
   './lib/html2canvas.min.js',
+  './lib/poppins.css',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -37,8 +38,8 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
 
   // Cache-first for everything: serve from cache, fall back to network,
-  // and stash anything new we fetch (this picks up the Google Fonts files
-  // on the first online visit so they work offline afterwards).
+  // and stash anything new we fetch (fonts are now embedded in lib/poppins.css,
+  // so nothing external is needed offline).
   event.respondWith(
     caches.match(req, { ignoreSearch: false }).then((cached) => {
       if (cached) return cached;
